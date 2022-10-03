@@ -16,6 +16,21 @@ def relu_derivative(X: np.ndarray) -> np.ndarray:
     dX[X < 0] = 0
     return dX
 
+def cross_entropy(Y_: np.ndarray, Y: np.ndarray) -> float:
+    """Computes the cross-entropy cost between Y_ and Y vectors.
+    
+    Args:
+        Y_: array of size (k,m)
+        Y:  array of size (k,m)
+    """
+    # TODO What if k != 1?
+    if Y_.shape != Y.shape:
+        raise ValueError(f"Shapes of Y_ {Y_.shape} and Y {Y.shape} should be the same.")
+    if Y.shape[0] != 1:
+        raise NotImplementedError(f"Not implemented for k!=1.")
+    logprobs = np.multiply(Y, np.log(Y_)) + np.multiply((1-Y), np.log(1-Y_))
+    J = -np.mean(logprobs)
+    return float(np.squeeze(J))
 
 if __name__ == "__main__":
     pass 
