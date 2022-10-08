@@ -35,7 +35,8 @@ class CrossEntropy(Function):
         return np.squeeze(J)
 
     def get_derivative(self, Y_, Y):
-        raise NotImplementedError
+        # TODO test 
+        return -(np.divide(Y, Y_) - np.divide(1 - Y, 1 - Y_))
 
 if __name__ == "__main__":
     sigmoid = Sigmoid()
