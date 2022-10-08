@@ -26,17 +26,18 @@ class Relu(Function):
         return dX
 
 class CrossEntropy(Function):
-    def __init__(self):
-        pass
+    '''Cross entropy error function implemented as function of predictions Y_ with fixed parameter Y for reference values.'''
+    def __init__(self, Y):
+        self.Y = Y
 
-    def __call__(self, Y_, Y):
-        logprobs = np.multiply(Y, np.log(Y_)) + np.multiply((1-Y), np.log(1-Y_))
+    def __call__(self, Y_):
+        logprobs = np.multiply(self.Y, np.log(Y_)) + np.multiply((1-self.Y), np.log(1-Y_))
         J = -np.mean(logprobs)
         return np.squeeze(J)
 
-    def get_derivative(self, Y_, Y):
+    def get_derivative(self, Y_):
         # TODO test 
-        return -(np.divide(Y, Y_) - np.divide(1 - Y, 1 - Y_))
+        return -(np.divide(self.Y, Y_) - np.divide(1 - self.Y, 1 - Y_))
 
 if __name__ == "__main__":
     sigmoid = Sigmoid()
