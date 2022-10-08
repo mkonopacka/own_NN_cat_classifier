@@ -38,5 +38,11 @@ if __name__ == "__main__":
     assert f1.get_derivative(1) == 2
     assert f1.get_derivative(2) == 4
 
+    xs = np.array(list(range(-30,30)))/10
+    ys = f1(xs)
+    plt.plot(xs,ys)
+    plt.grid()
+    plt.show()
+
 
 
